@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {DetailsComponent} from './details/details.component';
 import {CreateComponent} from './create/create.component';
+import {TripComponent} from './trip.component';
+
 
 
 const routes: Routes = [{
   path: 'trip',
   children: [{
-    path: '',
-    redirectTo: '/create',
-    pathMatch: 'full'
+  path: '',
+  component: TripComponent
   }, {
     path: 'create',
     component: CreateComponent

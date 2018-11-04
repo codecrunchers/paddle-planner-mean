@@ -5,6 +5,7 @@ import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component'
 import { TripRoutingModule } from './trip-routing.module';
 import { TripService } from './trip.service';
+import { TripComponent } from './trip.component';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { TripService } from './trip.service';
     SharedModule,
     TripRoutingModule,
   ],
-  declarations: [ CreateComponent, DetailsComponent],
+  declarations: [ CreateComponent, DetailsComponent, TripComponent],
   providers: [
     TripService
   ]
