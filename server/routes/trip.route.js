@@ -10,14 +10,23 @@ module.exports = router;
 //Authenticate for Acccess
 //router.use(passport.authenticate('jwt', { session: false }))
 
-router.get('/', tripCtrl.allTrips);
+router.get('/', asyncHandler(getAll));
 router.route('/create').post(asyncHandler(insert));
+router.get('/:id',asyncHandler(getTrip));
 
+async function getAll(req,res){
+  let trips = await tripCtrl.allTrips(req,res);
+  res.json(trips);
+}
 
 async function insert(req, res) {
   let trip = await tripCtrl.insert(req.body);
   res.json(trip);
 }
 
+async function getTrip(req,res){
+  let trip = await tripCtrl.getTrip(req,res);
+  res.json(trip);
+}
 
 
