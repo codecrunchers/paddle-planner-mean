@@ -6,6 +6,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { TripModule } from './trip/trip.module';
+
 
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
@@ -15,18 +17,12 @@ import { CatchErrorInterceptor } from './interceptors/http-error.interceptor';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { TripComponent } from './trip/trip.component';
-import { TripDetailComponent } from './trip-detail/trip-detail.component';
-import { TripCreateComponent } from './trip-create/trip-create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    TripComponent,
-    TripDetailComponent,
-    TripCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +32,7 @@ import { TripCreateComponent } from './trip-create/trip-create.component';
     SharedModule,
     AuthModule,
     AdminModule,
+    TripModule,
     AppRoutingModule,
   ],
   providers: [{
