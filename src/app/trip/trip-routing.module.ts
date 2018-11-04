@@ -7,15 +7,15 @@ import {TripComponent} from './trip.component';
 
 
 const routes: Routes = [{
-  path: 'trip',
-  children: [{
-  path: '',
-  component: TripComponent
+    path: 'trip',
+    children: [{
+    path: '',
+    component: TripComponent
   }, {
     path: 'create',
     component: CreateComponent
   }, {
-  path: 'details',
+     path: 'details',
     component: DetailsComponent
   }]
 }];

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
+  MatTableModule,
   MatToolbarModule,
   MatMenuModule,
   MatTabsModule,
@@ -26,6 +27,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    MatTableModule,
     MatToolbarModule,
     MatMenuModule,
     MatTabsModule,
@@ -48,6 +50,7 @@ import {
     FlexLayoutModule,
   ],
   exports: [
+    MatTableModule,
     MatToolbarModule,
     MatMenuModule,
     MatTabsModule,

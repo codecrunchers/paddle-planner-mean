@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
 
     this.tripService.create(name)
       .subscribe(data => {
-        this.router.navigate(['']);
+        this.router.navigate(['trip']);
       })
   }
 
