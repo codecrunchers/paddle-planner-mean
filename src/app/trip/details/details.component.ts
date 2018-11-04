@@ -11,7 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
 
-  trip = {}
+  trip = {name:"",createdAt:""}
+  options= {
+    zoom: 5,
+  }
+
   constructor(private route: ActivatedRoute, private tripService: TripService) { }
 
   ngOnInit() {

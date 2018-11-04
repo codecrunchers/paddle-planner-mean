@@ -6,10 +6,12 @@ import { DetailsComponent } from './details/details.component'
 import { TripRoutingModule } from './trip-routing.module';
 import { TripService } from './trip.service';
 import { TripComponent } from './trip.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 @NgModule({
-  imports: [
+imports: [
+LeafletModule,
   CommonModule,
     SharedModule,
     TripRoutingModule,

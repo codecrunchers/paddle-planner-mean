@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import {
   MatTableModule,
@@ -25,7 +26,8 @@ import {
 } from '@angular/material';
 
 @NgModule({
-  imports: [
+imports: [
+    LeafletModule,
     CommonModule,
     MatTableModule,
     MatToolbarModule,
@@ -50,6 +52,7 @@ import {
     FlexLayoutModule,
   ],
   exports: [
+  LeafletModule,
     MatTableModule,
     MatToolbarModule,
     MatMenuModule,
