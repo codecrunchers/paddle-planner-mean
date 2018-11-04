@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
 import { Router } from '@angular/router';
 import {TripService} from '../trip.service';
 import { ActivatedRoute } from '@angular/router';
+import { icon, latLng, Layer, marker, tileLayer } from 'leaflet';
 
 @Component({
   selector: 'app-details',
@@ -13,7 +14,11 @@ export class DetailsComponent implements OnInit {
 
   trip = {name:"",createdAt:""}
   options= {
-    zoom: 5,
+    layers: [
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 ,     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>' })
+	],
+    zoom: 10,
+    center: latLng(53.270962, -9.062691)
   }
 
   constructor(private route: ActivatedRoute, private tripService: TripService) { }
