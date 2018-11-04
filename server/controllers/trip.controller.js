@@ -23,7 +23,7 @@ async function insert(trip) {
   return await new Trip(trip).save();
 }
 
-async function getTrip(req, res){
+async function getTrip(req, res, next){
   return await Trip.findById(req.params.id, function (err, post) {
     if (err) {
       return next(err); 

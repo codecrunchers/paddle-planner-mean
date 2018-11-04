@@ -24,9 +24,9 @@ async function insert(req, res) {
   res.json(trip);
 }
 
-async function getTrip(req,res){
-  let trip = await tripCtrl.getTrip(req,res);
-  res.json(trip);
+async function getTrip(req,res, next){
+  let singleTrip = await tripCtrl.getTrip(req, res, next);
+  res.json(singleTrip);
 }
 
 

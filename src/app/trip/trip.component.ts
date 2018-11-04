@@ -20,13 +20,11 @@ export class TripComponent implements OnInit {
   ngOnInit() {
     this.tripService.getTrips()
       .subscribe(res => {
-        console.log(res);
         this.trips = res;
       }, err => {
         console.log(err);
       });
   }
-
 
 }
 

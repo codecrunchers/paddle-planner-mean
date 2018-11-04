@@ -35,6 +35,15 @@ export class TripService {
     });
   }
 
+
+  getTrip(id :string): Observable<any> {
+    const url = `/api/trip/${id}`;
+    return this.http.get(url, httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError)
+    );
+    }
+
   setTrip(trip): void {
     this.$tripSource.next(trip);
     (<any>window).trip = trip;
