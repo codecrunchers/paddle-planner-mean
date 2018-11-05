@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
     center: latLng(53.270962, -9.062691)
   }
 
+  //markers: Subject<any[]> = new BehaviorSubject<any[]>([]);
   markers: Layer[] = [];
 
   constructor(private route: ActivatedRoute, private tripService: TripService) { }
@@ -63,6 +64,10 @@ export class DetailsComponent implements OnInit {
 
   removeMarker() {
     this.markers.pop();
+  }
+
+  getmarkers(){
+    return this.markers;
   }
 
   getTrip(id :string){
