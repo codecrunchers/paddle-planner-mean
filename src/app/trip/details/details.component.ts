@@ -12,19 +12,57 @@ import { icon, latLng, Layer, marker, tileLayer } from 'leaflet';
 })
 export class DetailsComponent implements OnInit {
 
-  trip = {name:"",createdAt:""}
+  trip = {name:"",createdAt:""} //, startLat:"", startLong:"",owner:"" 
+
+  LAYER_OSM = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Open Street Map' });
   options= {
-    layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 ,     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>' })
-	],
+    layers: [ this.LAYER_OSM ],
     zoom: 10,
     center: latLng(53.270962, -9.062691)
   }
+
+  markers: Layer[] = [];
 
   constructor(private route: ActivatedRoute, private tripService: TripService) { }
 
   ngOnInit() {
     this.getTrip(this.route.snapshot.params['id']);
+
+    this.tripService.getWayPoints()
+      .subscribe(markers => {
+        //this.markers = markersList
+        //var _markers = JSON.parse(markersList);
+
+        var details = markers.map((singleMarker) => {
+          return (
+            this.addMarker(singleMarker.lat, singleMarker.lon)
+          );
+        });
+        console.log(markers);
+      });
+
+  }
+
+
+
+  addMarker(lat,lon) {
+    const newMarker = marker(
+      [ lat , lon  ],
+      {
+        icon: icon({
+          iconSize: [ 25, 41 ],
+          iconAnchor: [ 13, 41 ],
+          iconUrl: '2273e3d8ad9264b7daa5bdbf8e6b47f8.png',
+          shadowUrl: '44a526eed258222515aa21eaffd14a96.png' 
+        })
+      }
+    );
+
+    this.markers.push(newMarker);
+  }
+
+  removeMarker() {
+    this.markers.pop();
   }
 
   getTrip(id :string){

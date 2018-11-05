@@ -23,6 +23,13 @@ export class TripService {
       catchError(this.handleError));
   }
 
+  getWayPoints(): Observable<any> {
+    return this.http.get('/api/waypoint/', httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+
   create(name : string) : Observable<any> {
     return Observable.create(observer => {
       this.http.post('/api/trip/create', {
@@ -39,10 +46,10 @@ export class TripService {
   getTrip(id :string): Observable<any> {
     const url = `/api/trip/${id}`;
     return this.http.get(url, httpOptions).pipe(
-    map(this.extractData),
-    catchError(this.handleError)
+      map(this.extractData),
+      catchError(this.handleError)
     );
-    }
+  }
 
   setTrip(trip): void {
     this.$tripSource.next(trip);

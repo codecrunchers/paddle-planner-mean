@@ -7,9 +7,15 @@
     <mat-card-subtitle><h2>{{trip.createdAt}}</h2></mat-card-subtitle>
   </mat-card-header>
 </mat-card>
+<div class="row">
+  <label class="col col-form-label">{{markers?.length}} Markers</label>
+</div>
 
 <div style="height: 300px;"
      leaflet 
      [leafletOptions]="options">
+    <div *ngFor="let m of markers" [leafletLayer]="m"></div>
 </div>
+
+
 
