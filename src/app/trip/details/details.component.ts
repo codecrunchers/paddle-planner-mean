@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {TripService} from '../trip.service';
 import { ActivatedRoute } from '@angular/router';
 import { icon, latLng, Layer, marker, tileLayer } from 'leaflet';
+import { Observable } from "rxjs/Rx"
 
 @Component({
   selector: 'app-details',
@@ -21,8 +22,7 @@ export class DetailsComponent implements OnInit {
     center: latLng(53.270962, -9.062691)
   }
 
-  //markers: Subject<any[]> = new BehaviorSubject<any[]>([]);
-  markers: Layer[] = [];
+  public markers$ : Layer[] = []
 
   constructor(private route: ActivatedRoute, private tripService: TripService) { }
 
@@ -30,20 +30,13 @@ export class DetailsComponent implements OnInit {
     this.getTrip(this.route.snapshot.params['id']);
 
     this.tripService.getWayPoints()
-      .subscribe(markers => {
-        //this.markers = markersList
-        //var _markers = JSON.parse(markersList);
-
-        var details = markers.map((singleMarker) => {
-          return (
-            this.addMarker(singleMarker.lat, singleMarker.lon)
-          );
+      .subscribe((markers : Layer[])  => {
+        markers.map((singleMarker) => {
+          this.addMarker(singleMarker.lat, singleMarker.lon)
+          return this.markers$;
         });
-        console.log(markers);
       });
-
   }
-
 
 
   addMarker(lat,lon) {
@@ -53,22 +46,22 @@ export class DetailsComponent implements OnInit {
         icon: icon({
           iconSize: [ 25, 41 ],
           iconAnchor: [ 13, 41 ],
-          iconUrl: '2273e3d8ad9264b7daa5bdbf8e6b47f8.png',
-          shadowUrl: '44a526eed258222515aa21eaffd14a96.png' 
+          iconUrl: '/anchor.png',
         })
       }
     );
 
-    this.markers.push(newMarker);
+    this.markers$.push(newMarker);
   }
 
-  removeMarker() {
-    this.markers.pop();
+  removeLastMarker() {
+    this.markers$.pop();
   }
 
-  getmarkers(){
-    return this.markers;
+  getMarkers(){
+    return this.markers$;
   }
+
 
   getTrip(id :string){
     this.tripService.getTrip(id)

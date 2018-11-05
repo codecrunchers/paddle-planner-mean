@@ -8,13 +8,18 @@
   </mat-card-header>
 </mat-card>
 <div class="row">
-  <label class="col col-form-label">{{markers?.length}} Markers</label>
+  <label class="col col-form-label">{{ (markers$ | async).length }} Markers</label>
 </div>
+<ul class="marker__list" *ngIf="(markers$ | async).length">
+    <li class="marker" *ngFor="let marker of markers$ | async">
+        {{ marker }}
+    </li>
+</ul>
 
 <div style="height: 300px;"
      leaflet 
      [leafletOptions]="options">
-    <div *ngFor="let m of markers" [leafletLayer]="m"></div>
+    <div *ngFor="let m of markers$ | async " [leafletLayer]="m"></div>
 </div>
 
 
