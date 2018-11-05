@@ -7,20 +7,29 @@
     <mat-card-subtitle><h2>{{trip.createdAt}}</h2></mat-card-subtitle>
   </mat-card-header>
 </mat-card>
+
 <div class="row">
-  <label class="col col-form-label">{{ (markers$ | async).length }} Markers</label>
-</div>
-<ul class="marker__list" *ngIf="(markers$ | async).length">
-    <li class="marker" *ngFor="let marker of markers$ | async">
-        {{ marker }}
-    </li>
+  <label class="col col-form-label">{{ markers?.length }} Markers</label>
+
+<ul class="marker__list" *ngIf="(markers ).length">
+  <li class="marker" *ngFor="let marker of markers">
+    {{ marker.getLatLng() }}
+  </li>
 </ul>
 
-<div style="height: 300px;"
-     leaflet 
-     [leafletOptions]="options">
-    <div *ngFor="let m of markers$ | async " [leafletLayer]="m"></div>
 </div>
 
+
+<div class="card bg-light">
+  <div class="card-body">
+
+    <div style="height: 300px;"
+	 leaflet 
+	 [leafletOptions]="options">
+      <div *ngFor="let m of markers" [leafletLayer]="m"></div>
+    </div>
+
+  </div>
+</div>
 
 

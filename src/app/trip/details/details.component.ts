@@ -15,6 +15,7 @@ export class DetailsComponent implements OnInit {
 
   trip = {name:"",createdAt:""} //, startLat:"", startLong:"",owner:"" 
 
+  ANCHOR_URI='assets/anchor.png';
   LAYER_OSM = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Open Street Map' });
   options= {
     layers: [ this.LAYER_OSM ],
@@ -22,7 +23,7 @@ export class DetailsComponent implements OnInit {
     center: latLng(53.270962, -9.062691)
   }
 
-  public markers$ : Layer[] = []
+  public markers : Layer[] = []
 
   constructor(private route: ActivatedRoute, private tripService: TripService) { }
 
@@ -31,35 +32,36 @@ export class DetailsComponent implements OnInit {
 
     this.tripService.getWayPoints()
       .subscribe((markers : Layer[])  => {
-        markers.map((singleMarker) => {
-          this.addMarker(singleMarker.lat, singleMarker.lon)
-          return this.markers$;
-        });
+	markers.map((singleMarker) => {
+	  this.addMarker(singleMarker.lat, singleMarker.lon);
+	});
       });
+
   }
 
 
   addMarker(lat,lon) {
-    const newMarker = marker(
+
+  const newMarker = marker(
       [ lat , lon  ],
       {
-        icon: icon({
-          iconSize: [ 25, 41 ],
+      icon: icon({
+          iconSize: [ 16, 16 ],
           iconAnchor: [ 13, 41 ],
-          iconUrl: '/anchor.png',
+          iconUrl: this.ANCHOR_URI,
         })
       }
     );
 
-    this.markers$.push(newMarker);
+    this.markers.push(newMarker);
   }
 
   removeLastMarker() {
-    this.markers$.pop();
+    this.markers.pop();
   }
 
   getMarkers(){
-    return this.markers$;
+    return this.markers;
   }
 
 
