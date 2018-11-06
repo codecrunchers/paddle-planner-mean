@@ -1,5 +1,6 @@
 // config should be imported before importing any other file
 const config = require('./config/config');
+const updateServer = require('./config/WsServer.js');
 const app = require('./config/express');
 require('./config/mongoose');
 

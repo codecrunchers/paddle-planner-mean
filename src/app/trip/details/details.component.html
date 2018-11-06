@@ -9,10 +9,10 @@
 </mat-card>
 
 <div class="row">
-  <label class="col col-form-label">{{ markers?.length }} Markers</label>
+  <label class="col col-form-label">{{ markers$?.length }} Markers</label>
 
-<ul class="marker__list" *ngIf="markers?.length">
-  <li class="marker" *ngFor="let marker of markers">
+<ul class="marker__list" *ngIf="markers$?.length">
+  <li class="marker" *ngFor="let marker of markers$">
     {{ marker.owner_id }} 
     {{ marker.trip_id }}
   </li>

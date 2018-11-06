@@ -6,14 +6,18 @@ import { ActivatedRoute } from '@angular/router';
 import { icon, latLng, Layer, marker, tileLayer } from 'leaflet';
 import { Observable } from "rxjs/Rx"
 import { Http, Response } from "@angular/http"
+import { webSocket } from 'rxjs/webSocket' // for RxJS 6, for v5 use Observable.webSocket
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
- // changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class DetailsComponent implements OnInit {
+
+  //  subject.next(JSON.stringify({ op: 'hello' }));
 
   trip = {name:"",createdAt:""} //, startLat:"", startLong:"",owner:"" 
 
@@ -23,34 +27,44 @@ export class DetailsComponent implements OnInit {
     layers: [ this.LAYER_OSM ],
     zoom: 10,
     center: latLng(53.270962, -9.062691)
-    }
-
- 
-    public markers : []
-    //Layer[] = []
-
-  constructor(private route: ActivatedRoute, private tripService: TripService) { 
   }
+
+  public markers$: Observable<String[]> = []
+
+  constructor(private route: ActivatedRoute, private tripService: TripService) {   }
+
 
   ngOnInit() {
     this.getTrip(this.route.snapshot.params['id']);
-    this.tripService.getWayPoints().subscribe( res  => {
-         this.markers = res;
-         console.info(res);
-    });
+
+    let subject = webSocket('ws://localhost:8081');
+    subject.subscribe(
+      (msg) => {
+        console.info('message received:', msg),
+        this.fetchMarkers();
+      }
+      (err) => console.log(err),
+      () => console.log('complete')  
+      );  
+      
+      this.fetchMarkers();
   }
 
-  /**
-   * Add a Leaflet Icon to the  markers array
-   **/
-  createMarker(lat,lon) {
 
+  fetchMarkers(){
+    console.info('fectching');
     this.tripService.getWayPoints().subscribe( res  => {
-         this.markers = res;
-         console.info(res);
+      this.markers$ = res;
     });
+    }
 
-    //const newMarker = marker(
+/**
+ * Add a Leaflet Icon to the  markers array
+ **/
+createMarker(lat,lon) {
+
+
+  /*const newMarker = marker(
       [ lat , lon  ],
       {
         icon: icon({
@@ -60,18 +74,18 @@ export class DetailsComponent implements OnInit {
       }
     );
     this.markers.push(newMarker);*/
-  }
+}
 
 
-  getTrip(id :string){
-    this.tripService.getTrip(id)
-      .subscribe(data => {
-        this.trip = data
-      })
-  }
+getTrip(id :string){
+  this.tripService.getTrip(id)
+    .subscribe(data => {
+      this.trip = data
+    })
+}
 
-  deleteTrip(id :string){
-    console.log("TODO")
-  }
+deleteTrip(id :string){
+  console.log("TODO")
+}
 
 }
