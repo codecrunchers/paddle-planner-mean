@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ChangeDetectionStrategy , Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import {TripService} from '../trip.service';
 import { ActivatedRoute } from '@angular/router';
 import { icon, latLng, Layer, marker, tileLayer } from 'leaflet';
 import { Observable } from "rxjs/Rx"
+import { Http, Response } from "@angular/http"
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
+ // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailsComponent implements OnInit {
 
@@ -21,47 +23,43 @@ export class DetailsComponent implements OnInit {
     layers: [ this.LAYER_OSM ],
     zoom: 10,
     center: latLng(53.270962, -9.062691)
+    }
+
+ 
+    public markers : []
+    //Layer[] = []
+
+  constructor(private route: ActivatedRoute, private tripService: TripService) { 
   }
-
-  public markers : Layer[] = []
-
-  constructor(private route: ActivatedRoute, private tripService: TripService) { }
 
   ngOnInit() {
     this.getTrip(this.route.snapshot.params['id']);
-
-    this.tripService.getWayPoints()
-      .subscribe((markers : Layer[])  => {
-	markers.map((singleMarker) => {
-	  this.addMarker(singleMarker.lat, singleMarker.lon);
-	});
-      });
-
+    this.tripService.getWayPoints().subscribe( res  => {
+         this.markers = res;
+         console.info(res);
+    });
   }
 
+  /**
+   * Add a Leaflet Icon to the  markers array
+   **/
+  createMarker(lat,lon) {
 
-  addMarker(lat,lon) {
+    this.tripService.getWayPoints().subscribe( res  => {
+         this.markers = res;
+         console.info(res);
+    });
 
-  const newMarker = marker(
+    //const newMarker = marker(
       [ lat , lon  ],
       {
-      icon: icon({
+        icon: icon({
           iconSize: [ 16, 16 ],
-          iconAnchor: [ 13, 41 ],
           iconUrl: this.ANCHOR_URI,
         })
       }
     );
-
-    this.markers.push(newMarker);
-  }
-
-  removeLastMarker() {
-    this.markers.pop();
-  }
-
-  getMarkers(){
-    return this.markers;
+    this.markers.push(newMarker);*/
   }
 
 
