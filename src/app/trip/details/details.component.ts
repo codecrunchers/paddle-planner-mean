@@ -29,7 +29,7 @@ export class DetailsComponent implements OnInit {
     center: latLng(53.270962, -9.062691)
   }
 
-  public markers$: Observable<String[]> = []
+  public markers//: Layer[]
 
   constructor(private route: ActivatedRoute, private tripService: TripService) {   }
 
@@ -40,9 +40,9 @@ export class DetailsComponent implements OnInit {
     let subject = webSocket('ws://localhost:8081');
     subject.subscribe(
       (msg) => {
-        console.info('message received:', msg),
+        console.info('message received:', msg);
         this.fetchMarkers();
-      }
+      },
       (err) => console.log(err),
       () => console.log('complete')  
       );  
@@ -52,19 +52,25 @@ export class DetailsComponent implements OnInit {
 
 
   fetchMarkers(){
+    var test: Layer[] = [];
     console.info('fectching');
     this.tripService.getWayPoints().subscribe( res  => {
-      this.markers$ = res;
+      console.log(res);
+      res.forEach(wp => {
+        var marker = this.createMarker("53.270962", "-9.062691");      
+        test.push(marker);
+      });      
+      this.markers = test;    
     });
-    }
+
+  }
 
 /**
  * Add a Leaflet Icon to the  markers array
  **/
-createMarker(lat,lon) {
-
-
-  /*const newMarker = marker(
+  createMarker(lat,lon) {
+    console.log("Create New Marker");
+  const newMarker = marker(
       [ lat , lon  ],
       {
         icon: icon({
@@ -72,9 +78,9 @@ createMarker(lat,lon) {
           iconUrl: this.ANCHOR_URI,
         })
       }
-    );
-    this.markers.push(newMarker);*/
-}
+      );
+      return newMarker;
+      }
 
 
 getTrip(id :string){

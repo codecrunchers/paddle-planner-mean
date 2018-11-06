@@ -9,17 +9,16 @@
 </mat-card>
 
 <div class="row">
-  <label class="col col-form-label">{{ markers$?.length }} Markers</label>
+  <label class="col col-form-label">{{ markers?.length }} Markers</label>
 
-<ul class="marker__list" *ngIf="markers$?.length">
-  <li class="marker" *ngFor="let marker of markers$">
-    {{ marker.owner_id }} 
-    {{ marker.trip_id }}
+<!--<ul class="marker__list" *ngIf="markers?.length">
+  <li class="marker" *ngFor="let marker of markers">
+    {{ marker.getLatLng() }} 
   </li>
-</ul>
+</ul>-->
 
 </div>
-<!--
+
 
 <div class="card bg-light">
   <div class="card-body">
@@ -31,5 +30,5 @@
     </div>
 
   </div>
-</div>-->
+</div>
 <button (click)="createMarker(1,1)">Add Marker</button>
