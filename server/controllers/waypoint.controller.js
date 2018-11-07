@@ -15,9 +15,18 @@ module.exports = {
   getWayPoint,
 }
 
-async function allWayPoints(req, res) {
-  return await WayPoint.find(function (err, waypoints) {
-    if (err) return next(err);
+async function allWayPoints(req, res, next) {
+  var queryParams = {
+    owner_id: String(req.user._id),
+    trip_id: req.params.id //String(req.route.params.id)
+  };
+  console.info("Fetching Waypoints: ",  queryParams);
+
+  return await WayPoint.find(queryParams, function (err, waypoints) {
+    if (err){
+      console.info("Error Fetching WPs", err);
+      return next(err);
+    }
     res.json(waypoints);
   });
 }

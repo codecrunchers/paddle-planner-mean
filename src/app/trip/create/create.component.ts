@@ -26,10 +26,9 @@ export class CreateComponent implements OnInit {
   create() {
 
     if(!this.tripForm.valid) return;
-
-    let {
-      name,
-    } = this.tripForm.getRawValue();
+      let {
+        name,
+      } = this.tripForm.getRawValue();
 
     this.tripService.create(name)
       .subscribe(data => {

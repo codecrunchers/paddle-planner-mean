@@ -1,8 +1,10 @@
 const Joi = require('joi');
 const Trip = require('../models/trip.model');
+const passport = require('passport');
 
 const tripSchema = Joi.object({
   name: Joi.string().required(),
+  owner_id: Joi.string().required(),
 })
 
 module.exports = {
@@ -11,9 +13,18 @@ module.exports = {
   getTrip,
 }
 
-async function allTrips(req, res) {
-  return await Trip.find(function (err, trips) {
-    if (err) return next(err);
+async function allTrips(req, res, next) {
+  
+  var queryParams = {
+    owner_id: String(req.user._id),
+  };
+  
+  return await Trip.find(queryParams, function (err, trips) {
+    if (err){
+      console.info("Err Fetching Trips", err);
+      return next(err);
+    }
+    console.info("fetched trips for ", req.user._id);
     res.json(trips);
   });
 }

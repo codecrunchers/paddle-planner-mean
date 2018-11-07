@@ -24,9 +24,9 @@ if (config.env === 'development') {
 var distDir = '../../dist/';
 if (config.frontend == 'react'){
   distDir ='../../node_modules/material-dashboard-react/dist'
- }else{
+}else{
   distDir ='../../dist/' ;
- }
+}
 
 // 
 app.use(express.static(path.join(__dirname, distDir)))
@@ -35,10 +35,10 @@ app.use(/^((?!(api)).)*/, (req, res) => {
 });
 
 console.log(distDir);
- //React server
+//React server
 app.use(express.static(path.join(__dirname, '../../node_modules/material-dashboard-react/dist')))
 app.use(/^((?!(api)).)*/, (req, res) => {
-res.sendFile(path.join(__dirname, '../../dist/index.html'));
+  res.sendFile(path.join(__dirname, '../../dist/index.html'));
 }); 
 
 
@@ -56,6 +56,7 @@ app.use(helmet());
 app.use(cors());
 
 app.use(passport.initialize());
+app.use(passport.session());      
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

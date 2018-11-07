@@ -8,7 +8,7 @@ const router = express.Router();
 module.exports = router;
 
 //Authenticate for Acccess
-//router.use(passport.authenticate('jwt', { session: false }))
+router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/', asyncHandler(getAll));
 router.route('/create').post(asyncHandler(insert));
@@ -16,11 +16,15 @@ router.get('/:id',asyncHandler(getTrip));
 
 async function getAll(req,res){
   let trips = await tripCtrl.allTrips(req,res);
-  res.json(trips);
+  trips;
 }
 
 async function insert(req, res) {
-  let trip = await tripCtrl.insert(req.body);
+  var payload={};//= JSON.parse(JSON.stringify(req.body));
+  payload.owner_id = String(req.user._id);
+  payload.name = req.body.name;
+  console.log(payload);
+  let trip = await tripCtrl.insert(payload);
   res.json(trip);
 }
 

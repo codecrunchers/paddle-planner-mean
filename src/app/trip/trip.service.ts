@@ -18,13 +18,13 @@ export class TripService {
   public $tripSource = new Subject<any>();
 
     getTrips(): Observable<any> {
-      return this.http.get('/api/trip/', httpOptions).pipe(
+      return this.http.get('/api/trip', httpOptions).pipe(
        map(this.extractData),
         catchError(this.handleError));
   }
 
-  getWayPoints(): Observable<any> {
-    return this.http.get("/api/waypoint", httpOptions).pipe(
+  getWayPoints(queryParams): Observable<any> {
+    return this.http.get(`/api/waypoint/${queryParams}`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
