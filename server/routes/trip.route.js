@@ -30,7 +30,6 @@ async function insert(req, res) {
 
 async function getTrip(req,res, next){
   let singleTrip = await tripCtrl.getTrip(req, res, next);
-  res.json(singleTrip);
 }
 
 

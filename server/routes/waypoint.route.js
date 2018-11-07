@@ -18,7 +18,6 @@ router.route('/create').post(asyncHandler(insert));
 
 async function getAll(req, res, next){
   let waypoints = await wayPointCtrl.allWayPoints(req, res, next);
-  res.json(waypoints);
 
 }
 
@@ -31,7 +30,6 @@ async function insert(req, res) {
 
 async function getWayPoint(req,res, next){
   let singleWayPoint = await wayPointCtrl.getWayPoint(req, res, next);
-  res.json(singleWayPoint);
 }
 
 
