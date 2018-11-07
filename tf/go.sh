@@ -1,5 +1,6 @@
 #!/bin/bash
 _BUCKET_ID=$(uuidgen)
+sed -i "s/_BUCKET_ID/$_BUCKET_ID/" variables.tf
 sed -i "s/_BUCKET_ID/$_BUCKET_ID/" statefile.tf
 sed -i "s/_BUCKET_ID/$_BUCKET_ID/" terraform.tfvars
 

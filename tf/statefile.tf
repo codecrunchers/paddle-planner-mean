@@ -5,7 +5,7 @@
 terraform {
   backend "s3" {
     region     = "eu-west-1"
-    bucket     = "alan-_BUCKET_ID"
+    bucket     = "paddle-planner-_BUCKET_ID"
     key        = "tf_statefiles/dev.tfstate"
     acl        = "private"
     encrypt    = true
@@ -13,7 +13,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "statefiles_for_app" {
-  bucket = "alan-_BUCKET_ID"
+  bucket = "paddle-planner-_BUCKET_ID"
   acl    = "private"
 
   versioning {

@@ -1,15 +1,4 @@
-variable "aws_access_key" {
-    description = "The AWS access key."
-}
-
-variable "aws_secret_key" {
-    description = "The AWS secret key."
-}
-
-variable "region" {
-    description = "The AWS region to create resources in."
-    default = "us-east-1"
-}
+key_name = "alan-_BUCKET_ID-key"
 
 # TODO: support multiple availability zones, and default to it.
 variable "availability_zone" {
