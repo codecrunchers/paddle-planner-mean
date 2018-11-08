@@ -1,46 +1,64 @@
-key_name = "alan-_BUCKET_ID-key"
+variable "dns_zone" {}
 
-# TODO: support multiple availability zones, and default to it.
-variable "availability_zone" {
-    description = "The availability zone"
-    default = "us-east-1a"
+variable "key_name" {
+  #  default = "my-test-key"
 }
 
-variable "ecs_cluster_name" {
-    description = "The name of the Amazon ECS cluster."
-    default = "main"
+variable "stack_details" {
+  type = "map"
+
+  default = {
+    stack_id   = "PaddlePlanner-1"
+    stack_name = "PaddlePlanner"
+    env        = "dev"
+  }
 }
 
-variable "amis" {
-    description = "Which AMI to spawn. Defaults to the AWS ECS optimized images."
-    # TODO: support other regions.
-    default = {
-        us-east-1 = "ami-ddc7b6b7"
-    }
+variable "vpn_instance_details" {
+  type = "map"
+}
+
+variable "ecs_params" {
+  type = "map"
+
+  default = {
+    min_instances     = 1
+    max_instances     = 3
+    desired_instances = 1
+    ecs_name          = "PaddlePlanner"
+    instance_type     = "t2.micro"
+  }
+}
+
+variable "region" {
+  default = "eu-west-1"
+}
+
+# Pipeline CIDR Stuff
+variable "pipeline_cidr_block" {
+  default = "10.171.0.0/16"
+}
+
+variable "pipeline_external_access_cidr_block" {
+  type = "list"
+}
+
+variable "pipeline_public_subnet_cidr_blocks" {
+  type    = "list"
+  default = ["10.171.77.128/25", "10.171.78.0/25"]
+}
+
+variable "pipeline_private_subnet_cidr_blocks" {
+  type    = "list"
+  default = ["10.171.76.0/25", "10.171.76.128/25"]
+}
+
+variable "pipeline_availability_zones" {
+  type    = "list"
+  default = ["eu-west-1a", "eu-west-1b"]
 }
 
 
-variable "autoscale_min" {
-    default = "1"
-    description = "Minimum autoscale (number of EC2)"
-}
-
-variable "autoscale_max" {
-    default = "10"
-    description = "Maximum autoscale (number of EC2)"
-}
-
-variable "autoscale_desired" {
-    default = "4"
-    description = "Desired autoscale (number of EC2)"
-}
-
-
-variable "instance_type" {
-    default = "t2.micro"
-}
-
-variable "ssh_pubkey_file" {
-    description = "Path to an SSH public key"
-    default = "~/.ssh/id_rsa.pub"
+variable "nginx_definition" {
+  type = "map"
 }

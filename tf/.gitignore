@@ -1,4 +1,7 @@
-terraform.tfstate
+key.tf
+.terraform/modules/
 terraform.tfstate.backup
-
-*.py[co]
+.*.backup
+.*\.backup
+.terraform/
+*.backup
