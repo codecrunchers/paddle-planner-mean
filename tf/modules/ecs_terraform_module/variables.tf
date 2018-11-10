@@ -22,15 +22,15 @@ variable "alb_target_groups" {
 
 variable "aws_region" {
   description = "The AWS region to create things in."
-  default     = "eu-west-1"
+  default     = "us-west-1"
 }
 
 variable "ecs_amis" {
   type = "map"
 
   default = {
-    eu-west-1 = "ami-809f84e6"
-    eu-west-2 = "ami-ff15039b"
+    us-west-1 = "ami-809f84e6"
+    us-west-2 = "ami-ff15039b"
   }
 }
 

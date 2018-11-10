@@ -1,8 +1,12 @@
+variable "nat_gateway_ids" {
+  type = "list"
+}
+
 variable "stack_details" {
   type = "map"
 }
 
-variable "iam_ecs" {}
+#variable "iam_ecs" {}
 
 variable "dns_zone_name" {
   type = "string"
@@ -36,7 +40,7 @@ variable "ecs_amis" {
   type = "map"
 
   default = {
-    eu-west-1 = "ami-809f84e6"
-    eu-west-2 = "ami-ff15039b"
+    us-west-1 = "ami-809f84e6"
+    us-west-2 = "ami-ff15039b"
   }
 }

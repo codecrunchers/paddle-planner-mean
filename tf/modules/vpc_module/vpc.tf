@@ -20,3 +20,33 @@ resource "aws_vpc_endpoint" "s3" {
 data "aws_region" "current" {
   current = true
 }
+
+resource "aws_security_group" "nat" {
+  name        = "nat-sg"
+  description = "Controls access to the NAT AMI"
+  vpc_id      = "${aws_vpc.default.id}"
+
+  ingress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+
+    cidr_blocks = [
+      "0.0.0.0/0",
+    ]
+  }
+
+  tags {
+    Name        = "Security for NAT"
+    stack_id    = "${var.stack_details["stack_id"]}"
+    stack_name  = "${var.stack_details["stack_name"]}"
+    Environment = "${var.stack_details["env"]}"
+  }
+}

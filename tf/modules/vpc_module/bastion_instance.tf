@@ -1,9 +1,9 @@
 resource "aws_instance" "bastion" {
-  ami           = "ami-ebd02392"                          #TODO Get better Tooled box
+  ami           = "ami-0bdb828fd58c52235"                 #TODO Get better Tooled box
   instance_type = "t2.micro"                              #TODO Var
-  subnet_id     = "${element(aws_subnet.public.*.id,0)}"
+  subnet_id     = "${element(aws_subnet.private.*.id,0)}"
 
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   key_name                    = "${var.key_name}"
   vpc_security_group_ids      = ["${aws_security_group.bastion.id}"]
 

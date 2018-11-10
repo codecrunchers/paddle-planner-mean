@@ -31,7 +31,7 @@ resource "aws_route" "private" {
 
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = "${element(aws_nat_gateway.default.*.id, count.index)}"
+  nat_gateway_id         = "${element(var.nat_gateway_ids, count.index)}"
 }
 
 resource "aws_route_table_association" "private" {

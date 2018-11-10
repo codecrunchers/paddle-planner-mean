@@ -1,3 +1,4 @@
+*.pem
 key.tf
 .terraform/modules/
 terraform.tfstate.backup

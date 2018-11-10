@@ -1,4 +1,9 @@
 # Out
+
+output "nat_id" {
+  value = "${aws_security_group.nat.id}"
+}
+
 output "cidr_block" {
   value = "${aws_vpc.default.cidr_block}"
 }
@@ -27,10 +32,6 @@ output "private_subnet_ids" {
   value = ["${aws_subnet.private.*.id}"]
 }
 
-output "nat_gateway_ips" {
-  value = ["${aws_eip.nat.*.public_ip}"]
-}
-
-output "nat_gateway_ids" {
-  value = ["${aws_eip.nat.*.id}"]
+output "security_group_nat_id" {
+  value = ["${aws_security_group.nat.id}"]
 }

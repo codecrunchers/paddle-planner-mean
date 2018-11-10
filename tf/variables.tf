@@ -31,7 +31,7 @@ variable "ecs_params" {
 }
 
 variable "region" {
-  default = "eu-west-1"
+  default = "us-west-1"
 }
 
 # Pipeline CIDR Stuff
@@ -55,7 +55,7 @@ variable "pipeline_private_subnet_cidr_blocks" {
 
 variable "pipeline_availability_zones" {
   type    = "list"
-  default = ["eu-west-1a", "eu-west-1b"]
+  default = ["us-west-1a", "us-west-1b"]
 }
 
 
