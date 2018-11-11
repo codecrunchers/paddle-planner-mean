@@ -17,11 +17,11 @@ vpn_instance_details = {
 }
 
 thttpd_definition = {
-  docker_image_tag           = "larsks/thttpd"
+  docker_image_tag           = "gists/lighttpd"
   name                       = "thttpd"
   context                    = ""
   host_port_to_expose        = "8080"
-  container_port_to_expose   = "8080"
+  container_port_to_expose   = "80"
   instance_memory_allocation = "512"
   instance_count             = "1"
 }

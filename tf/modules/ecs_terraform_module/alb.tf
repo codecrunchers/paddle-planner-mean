@@ -15,7 +15,7 @@ resource "aws_alb" "alb" {
 resource "aws_alb_target_group" "alb_target_groups" {
   count    = "${length(var.alb_target_groups)}"
   name     = "${var.stack_details["env"]}-${var.stack_details["stack_name"]}-${lookup(var.alb_target_groups[count.index],"name")}"
-  port     = "${lookup(var.alb_target_groups[count.index],"container_port_to_expose")}"
+  port     = "${lookup(var.alb_target_groups[count.index],"host_port_to_expose")}"
   protocol = "HTTP"
   vpc_id   = "${var.vpc_id}"
 
