@@ -2,7 +2,7 @@ dns_zone = "paddle-planner.com"
 
 region = "us-west-1"
 
-pipeline_external_access_cidr_block = ["37.228.251.37/32", "83.70.128.30/32", "192.30.252.0/22", "185.199.108.0/22"] //Home,GitHUB*2
+pipeline_external_access_cidr_block = ["86.45.247.140/32"] //Home,GitHUB*2
 
 #TODO: Dup
 #Key Name is Pattern _BUCKET_ID - see go.sh
@@ -11,20 +11,17 @@ key_name = "paddle-planner-new-launch-key"
 
 #Key Name is Pattern _BUCKET_ID - see go.sh
 vpn_instance_details = {
-  ami      = "ami-01a191cc4def950c4"
-  size     = "t2.micro"
+  ami      = "ami-0f64ffcaec0c6d2f2"
+  size     = "t2.nano"
   key_name = "paddle-planner-new-launch-key"
 }
 
-
-
-nginx_definition = {
-  docker_image_tag           = "nginx"
-  name                       = "nginx"
+thttpd_definition = {
+  docker_image_tag           = "larsks/thttpd"
+  name                       = "thttpd"
   context                    = ""
-  host_port_to_expose        = "80"
+  host_port_to_expose        = "8080"
   container_port_to_expose   = "8080"
-  instance_memory_allocation = "1024"
+  instance_memory_allocation = "512"
   instance_count             = "1"
 }
-

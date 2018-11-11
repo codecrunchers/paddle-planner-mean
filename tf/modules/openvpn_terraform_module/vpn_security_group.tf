@@ -24,6 +24,17 @@ resource "aws_security_group_rule" "vpn_ingress_22" {
   cidr_blocks = "${var.whitelist_cidr_blocks}"
 }
 
+resource "aws_security_group_rule" "vpn_ingress_12321" {
+  security_group_id = "${aws_security_group.vpn.id}"
+
+  type      = "ingress"
+  from_port = 12321
+  to_port   = 12321
+  protocol  = "tcp"
+
+  cidr_blocks = "${var.whitelist_cidr_blocks}"
+}
+
 resource "aws_security_group_rule" "vpn_ingress_443" {
   security_group_id = "${aws_security_group.vpn.id}"
 

@@ -2,9 +2,10 @@ resource "aws_instance" "vpn" {
   vpc_security_group_ids = ["${aws_security_group.vpn.id}"]
   subnet_id              = "${var.subnets[0]}"
 
-  ami           = "${var.vpn_instance_details["ami"]}"
-  instance_type = "${var.vpn_instance_details["size"]}"
-  key_name      = "${var.vpn_instance_details["key_name"]}"
+  source_dest_check = false
+  ami               = "${var.vpn_instance_details["ami"]}"
+  instance_type     = "${var.vpn_instance_details["size"]}"
+  key_name          = "${var.vpn_instance_details["key_name"]}"
 
   lifecycle {
     #  prevent_destroy = true

@@ -52,21 +52,21 @@ resource "aws_instance" "nat" {
   tags                   = "${merge(var.tags, map("Name", format("%s-nat%d", var.name, count.index+1)))}"
   user_data              = "${element(data.template_file.user_data.*.rendered, count.index)}"
 
-  provisioner "remote-exec" {
-    inline = [
-      "while sudo pkill -0 cloud-init; do sleep 2; done",
-    ]
+  #provisioner "remote-exec" {
+  # inline = [
+  #  "while sudo pkill -0 cloud-init; do sleep 2; done",
+  #]
 
-    connection {
-      user = "ubuntu"
+  #connection {
+  #  user = "ec2-user"
 
-      # If we are using a bastion host ssh in via the private IP
-      # If we set this to an empty string we get the default behaviour.
-      host = "${var.ssh_bastion_host != "" ? self.private_ip : ""}"
+  # If we are using a bastion host ssh in via the private IP
+  # If we set this to an empty string we get the default behaviour.
+  # host = "${var.ssh_bastion_host != "" ? self.private_ip : ""}"
 
-      private_key  = "${var.aws_key_location}"
-      bastion_host = "${var.ssh_bastion_host}"
-      bastion_user = "${var.ssh_bastion_user}"
-    }
-  }
+  #private_key  = "${var.aws_key_location}"
+  #bastion_host = "${var.ssh_bastion_host}"
+  #bastion_user = "${var.ssh_bastion_user}"
+  # }
+  # }
 }

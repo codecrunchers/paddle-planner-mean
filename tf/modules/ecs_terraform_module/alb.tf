@@ -2,7 +2,7 @@ resource "aws_alb" "alb" {
   name            = "${var.stack_details["env"]}-${var.stack_details["stack_name"]}-alb"
   subnets         = ["${var.public_subnet_ids}"]
   security_groups = ["${aws_security_group.alb_sg.id}"]
-  internal        = true
+  internal        = false
   ip_address_type = "ipv4"
 
   tags {
