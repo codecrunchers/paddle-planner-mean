@@ -12,3 +12,4 @@ for row in $(echo ${PARAMETERS} | jq -c '.Parameters' | jq -c '.[]'); do
 
     export ${KEY}=${VALUE}
 done
+

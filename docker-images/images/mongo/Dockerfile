@@ -1,6 +1,6 @@
 FROM mongo
 
-ENV SECRET_PATH "/dev/paddle-planner/config/secrets/web*"
+ENV SECRET_PATH "/dev/paddle-planner/config/secrets/web"
 ADD entrypoint.sh /
 
 #AWS DEPS
@@ -16,6 +16,6 @@ RUN apt update && \
 
 
 ADD databaseInit/mongo-paddle-planner/ /docker-entrypoint-initdb.d
-ENTRYPOINT /entrypoint.sh $SECRET_PATH && /usr/local/bin/docker-entrypoint.sh mongod
+ENTRYPOINT . /entrypoint.sh $SECRET_PATH && /usr/local/bin/docker-entrypoint.sh mongod
 
 
