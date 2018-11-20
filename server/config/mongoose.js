@@ -8,7 +8,9 @@ const config = require('./config');
 const dbusername=process.env.APP_MONGO_USER;
 const dbpassword=process.env.APP_MONGO_PASS;
 const db = process.env.APP_MONGO_DB;
-var mongoUri = "mongodb://"+dbusername+":"+dbpassword+"@mongo/"+db
+const mongoHost = process.env.MONGO_HOST_NAME;
+
+var mongoUri = "mongodb://"+dbusername+":"+dbpassword+ "@" + mongoHost + "/" +db
 console.log("Connecting to: " +  mongoUri)
 mongoose.connect(mongoUri, { useNewUrlParser: true, keepAlive: 1 });
 mongoose.connection.on('error', () => {
