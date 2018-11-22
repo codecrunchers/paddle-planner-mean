@@ -1,6 +1,67 @@
-<app-header [user]="user"></app-header>
-<div class="wrapper-app">
+<div class="root__container">
+  <header class="main__header">
+
+    <div class="left__section">
+      <div>
+        <a class="links side" *ngIf="user" [matMenuTriggerFor]="menu">
+          <mat-icon>menu</mat-icon>
+        </a>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngIf="user && user.isAdmin" [routerLink]="['/admin']">Admin</button>
+          <button mat-menu-item *ngIf="user" [routerLink]="['/account']">Account</button>
+          <button mat-menu-item (click)="logout()">logout</button>
+        </mat-menu>
+      </div>
+
+
+
+      <a [routerLink]="['/']">
+        <svg class="logo__icon" viewBox="150.3 22.2 413.7 42.8">
+          <path fill="black" d="M193.1 65h-42.8L193 22.2z" data-name="Path 2"/>
+          <path fill="gray" d="M150.3 65V22.2L193 65z" data-name="Path 1"/>
+          <text class="logo__text" fill="#432c85"
+                                   font-family="SegoeUI-Semibold,Segoe UI" font-size="30" font-weight="600"
+                                                                                          letter-spacing=".1em" transform="translate(237 56)">
+          <tspan x="0" y="0">Paddle Planner</tspan>
+          </text>
+        </svg>
+      </a>
+
+    </div>
+
+    <h3 *ngIf="user" class="date__text">&lt;CITY&gt;</h3>
+
+
+    <div class="right__section">
+      <div>
+
+        <div class="" *ngIf="user">
+          <a class="" (click)="logout()" [routerLink]="['/auth/logout']">
+            <mat-icon>logout</mat-icon>
+          </a>
+        </div>
+
+        <div class="" *ngIf="!user">
+          <a class="" [routerLink]="['/auth/login']" *ngIf="!user" alt="logout">
+            <mat-icon>account_circle</mat-icon>
+          </a>
+
+        </div>
+
+
+      </div></div>
+  </header>
+
+  <!-- Main Content -->
+
+  <!--<router-outlet></router-outlet>-->
+  <main class="main__container">
   <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+
+  <footer class="main__footer">
+    <small class="copyright__text">Copyright © 2018 Paddle Planner</small>
+  </footer>
 </div>
-<footer>
-</footer>

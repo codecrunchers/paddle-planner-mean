@@ -1,3 +1,59 @@
-<p>
-  home works!
-</p>
+<div class="main__inner__container">
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image-paddle"></div>
+    <mat-card-title>Live Trips</mat-card-title>
+    <mat-card-subtitle>Realtime Map Updates</mat-card-subtitle>
+  </mat-card-header>
+    <img mat-card-image src="/assets/paddler.png" alt="paddler">
+  <mat-card-content>
+    <p>
+      Using the Android App or Paddle Planner Arduino Tracker you can publish live updates of position,
+      weather, progress etc...
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+     <button  [routerLink]="['/trip']"  mat-raised-button>View Live</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image-done"></div>
+    <mat-card-title>View Completed Trips </mat-card-title>
+    <mat-card-subtitle>View Trips and galleries</mat-card-subtitle>
+  </mat-card-header>
+    <img mat-card-image src="/assets/trips.png" alt="paddler">
+  <mat-card-content>
+    <p>
+      Replay all your completed trips, with weather and gallery images overlayed on the map
+      <br/><br/>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+     <button [routerLink]="['/trip']"  mat-raised-button>View Trips</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image-weather"></div>
+    <mat-card-title>Planning</mat-card-title>
+    <mat-card-subtitle>Weather, Gear, Lists</mat-card-subtitle>
+  </mat-card-header>
+    <img mat-card-image src="/assets/weather.png" alt="paddler">
+  <mat-card-content>
+    <p>
+      Weather planning for trip locations and gear templates 
+      <br/>
+      <br/><br/>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+     <button mat-raised-button>View Weather</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>
+
+

@@ -1,2 +1,43 @@
-.wrapper-app {
+/*Home Layout*/
+.main__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  align-items: center;
+  justify-items: center;
+  height: 100%;
 }
+
+.example-header-image-paddle {
+  background-image: url('/assets/live.png');
+  background-size: cover;
+}
+
+.example-header-image-done {
+  background-image: url('/assets/done.png');
+  background-size: cover;
+}
+
+
+.example-header-image-weather {
+  background-image: url('/assets/weather-icon.png');
+  background-size: cover;
+}
+
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.mat-card-title {
+  font-size: 16px;
+}
+
+
+
+
